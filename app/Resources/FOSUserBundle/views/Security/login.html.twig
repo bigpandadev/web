@@ -1,0 +1,67 @@
+{% extends "_layouts/list.html.twig" %}
+
+{% block content %}
+<style>
+    form div {
+        display: block;
+        position: relative;
+        padding-bottom: .4em;
+    }
+    form div label {
+        display: block;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        font-size: 10pt;
+        padding: 2pt 4pt;
+    }
+    form div input {
+        display: block;
+        position: relative;
+        padding: 16pt 6pt 2pt 10pt;
+        font-size: 16pt;
+    }
+    form input[type="submit"] {
+        display: block;
+        position: relative;
+        padding: 4pt 6pt;
+        font-size: 16pt;
+        text-align: right;
+    }
+</style>
+
+<div class="wrapper">
+    <section class="container">
+        <header class="welcome">
+            <h1>Login</h1>
+        </header>
+
+        <div>
+            {% if error %}
+                <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
+            {% endif %}
+            
+            <form action="{{ path("fos_user_security_check") }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                <div>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+                    <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                </div>
+
+                <div>
+                    <input type="password" id="password" name="_password" required="required" />
+                    <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                </div>
+
+{#                <label for="remember_me">
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                    {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+                </label>#}
+
+                <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+            </form>
+        </div>
+    </section>
+</div>
+{% endblock content %}

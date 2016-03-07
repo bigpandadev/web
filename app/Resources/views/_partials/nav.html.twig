@@ -1,0 +1,24 @@
+<style>
+    #nav-main { background: #FFF; margin: 0 auto 1em; max-width: 800px; width: 95%; }
+    #nav-main ul { list-style: none; display: inline-block; }
+    #nav-main ul li { display: inline-block; padding: .2em 1em; }
+    #nav-main ul li a { text-decoration: none; color: #0066ff; }
+    #nav-main ul li a:hover { color: #3399ff; }
+    #nav-login { float: right; }
+</style>
+
+<div id="nav-main">
+    <section class="nav-container">
+        <ul>
+            <li><a href="{{ path('homepage') }}">Home</a></li>
+            <li><a href="{{ path('story') }}">Stories</a></li>
+        </ul>
+        <ul id="nav-login">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <li>{{ app.user.username }} [<a href="{{ path('fos_user_security_logout') }}">X</a>]</li>
+            {% else %}
+                <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+            {% endif %}
+        </ul>
+    </section>
+</div>

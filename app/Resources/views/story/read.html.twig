@@ -1,0 +1,36 @@
+{% extends '_layouts/list.html.twig' %}
+
+{% block content %}
+    <div class="wrapper">
+        {% if story is defined %}
+            <article class="container">
+                <header class="welcome">
+                    <h1>{{ story.title|escape('html') }}</h1>
+                </header>
+
+                <section>
+                    {% for segment in story.segments %}
+                        {% if segment.type == "title" %}
+                            <h2>{{ segment.text|escape('html') }}</h2>
+                        {% elseif segment.type == 'subtitle' %}
+                            <h3>{{ segment.text|escape('html') }}</h3>
+                        {% elseif segment.type|escape('html') == 'text' %}
+                            <p>{{ segment.text }}</p>
+                        {% elseif segment.type|escape('html') == 'image' %}
+                            <img src="{{ segment.src|escape('html') }}" alt="{{ segment.alt|escape('html') }}" />
+                        {% endif %}
+                    {% endfor %}
+                </section>
+            </article>
+        {% else %}
+            <section class="container">
+                <header class="welcome">
+                    <h1>{{ 'Story not found'|escape('html') }}</h1>
+                </header>
+                <section>
+                    <p>{{ 'Story with supplied id is not found.'|escape('html') }}</p>
+                </section>
+            </section>
+        {% endif %}
+    </div>
+{% endblock %}
