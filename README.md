@@ -1,4 +1,5 @@
-cmweb
-=====
+BigPanda project
+================
 
-A Symfony project created on March 5, 2016, 1:42 pm.
+An website with simple tutorials on how to write code (how to start 
+programming).
